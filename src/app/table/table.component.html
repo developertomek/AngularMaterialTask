@@ -1,0 +1,82 @@
+<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 data-table">
+
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-id"> id </th>
+        <td data-label="id" mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="th"> name </th>
+        <td data-label="name" mat-cell *matCellDef="let element"> 
+            <span *ngIf="element.id !== editRowID">{{element.name}}</span>
+            <span *ngIf="element.id === editRowID">
+            <input type="text" [(ngModel)]="element.name" (keyup)="isDisabled(isName(element.name),isNumber(element.phone),isBool(element.admin))">
+            </span>
+            <span class="info" *ngIf="!isName(element.name)"><em>Is it real name?</em></span>
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="phone">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="th"> phone </th>
+        <td data-label="phone" mat-cell *matCellDef="let element"> 
+            <span *ngIf="element.id !== editRowID">{{element.phone}}</span>
+            <span *ngIf="element.id === editRowID">
+            <input type="text" [(ngModel)]="element.phone" (keyup)="isDisabled(isName(element.name),isNumber(element.phone),isBool(element.admin))">
+            </span>
+            <span class="info" *ngIf="!isNumber(element.phone)"><em>It's not a phone number</em></span>
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="admin">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="th"> admin </th>
+        <td data-label="admin" mat-cell *matCellDef="let element"> 
+            <span *ngIf='element.id !== editRowID'>{{element.admin}}</span>
+            <span *ngIf="element.id === editRowID">
+                <input type="text" [(ngModel)]="element.admin" (keyup)="isDisabled(isName(element.name),isNumber(element.phone),isBool(element.admin))">
+            </span>
+            <span class="info" *ngIf="!isBool(element.admin)"><em>Only true or false</em></span>
+        </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="th"> date </th>
+        <td data-label="date" mat-cell *matCellDef="let element"> {{element.date | date:'yyyy-MM-dd'}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef class="th">Actions</th>
+        <td data-label="actions" mat-cell *matCellDef="let element">
+            <button 
+                mat-raised-button 
+                color="basic"
+                *ngIf="element.id !== editRowID" 
+                (click)="editRow(element.id)"
+                >
+                Edit
+            </button>
+  
+            <button 
+            id="test"
+                mat-raised-button 
+                color="primary" 
+                *ngIf="element.id === editRowID" 
+                (click)="editRow()"
+                [disabled] = "btnDisabled"
+                >
+                Save
+            </button>
+          
+            <button 
+                mat-raised-button
+                color="warn"
+                (click)="deleteRow(element.id)"
+                >
+                Delete
+            </button>
+          
+        </td>
+    </ng-container> 
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns" class="tr"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
