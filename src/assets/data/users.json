@@ -1,0 +1,12 @@
+[
+    {"id": 1, "name": "Hydrogen", "phone": 123456789, "admin": true, "date": 1548973623006},
+    {"id": 2, "name": "Helium", "phone": 134567892, "admin": false, "date": 1549323623000},
+    {"id": 3, "name": "Lithium", "phone": 124567893, "admin": false, "date": 1551323623005},
+    {"id": 4, "name": "Beryllium", "phone": 234567891, "admin": true, "date": 1556323623001},
+    {"id": 5, "name": "Boron", "phone": 345678912, "admin": true, "date": 1508323623009},
+    {"id": 6, "name": "Carbon", "phone": 456789123, "admin": false, "date": 1509323623002},
+    {"id": 7, "name": "Nitrogen", "phone": 567891234, "admin": false, "date": 1522323623008},
+    {"id": 8, "name": "Oxygen", "phone": 678912345, "admin": false, "date": 1532323623004},
+    {"id": 9, "name": "Fluorine", "phone": 789123456, "admin": true, "date": 1542323623002},
+    {"id": 10, "name": "Neon", "phone": 891234567, "admin": true, "date": 1549923623003}
+]

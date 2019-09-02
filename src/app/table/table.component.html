@@ -10,7 +10,9 @@
         <td data-label="name" mat-cell *matCellDef="let element"> 
             <span *ngIf="element.id !== editRowID">{{element.name}}</span>
             <span *ngIf="element.id === editRowID">
-            <input type="text" [(ngModel)]="element.name" (keyup)="isDisabled(isName(element.name),isNumber(element.phone),isBool(element.admin))">
+                <mat-form-field class="matFormField">
+                    <input matInput type="text" [(ngModel)]="element.name" (keyup)="isDisabled(isName(element.name),isNumber(element.phone))">
+                </mat-form-field>
             </span>
             <span class="info" *ngIf="!isName(element.name)"><em>Is it real name?</em></span>
         </td>
@@ -21,7 +23,9 @@
         <td data-label="phone" mat-cell *matCellDef="let element"> 
             <span *ngIf="element.id !== editRowID">{{element.phone}}</span>
             <span *ngIf="element.id === editRowID">
-            <input type="text" [(ngModel)]="element.phone" (keyup)="isDisabled(isName(element.name),isNumber(element.phone),isBool(element.admin))">
+                <mat-form-field class="matFormField">
+                    <input matInput type="text" [(ngModel)]="element.phone" (keyup)="isDisabled(isName(element.name),isNumber(element.phone))">
+                </mat-form-field>
             </span>
             <span class="info" *ngIf="!isNumber(element.phone)"><em>It's not a phone number</em></span>
         </td>
@@ -32,15 +36,28 @@
         <td data-label="admin" mat-cell *matCellDef="let element"> 
             <span *ngIf='element.id !== editRowID'>{{element.admin}}</span>
             <span *ngIf="element.id === editRowID">
-                <input type="text" [(ngModel)]="element.admin" (keyup)="isDisabled(isName(element.name),isNumber(element.phone),isBool(element.admin))">
+                <mat-form-field class="matFormField">
+                    <select matNativeControl required [(ngModel)]="element.admin">
+                        <option value="true">true</option>
+                        <option value="false">false</option>
+                    </select>
+                </mat-form-field>
             </span>
-            <span class="info" *ngIf="!isBool(element.admin)"><em>Only true or false</em></span>
         </td>
     </ng-container>
     
     <ng-container matColumnDef="date">
         <th mat-header-cell *matHeaderCellDef mat-sort-header class="th"> date </th>
-        <td data-label="date" mat-cell *matCellDef="let element"> {{element.date | date:'yyyy-MM-dd'}} </td>
+        <td data-label="date" mat-cell *matCellDef="let element"> 
+            <span *ngIf='element.id !== editRowID'>{{element.date | date:'MM/dd/yyyy'}} </span>
+            <span *ngIf="element.id === editRowID">
+                <mat-form-field class="matFormField">
+                    <input matInput [matDatepicker]="picker" [(ngModel)]="element.date" placeholder="Choose a date">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+            </span>
+        </td>
     </ng-container>
 
     <ng-container matColumnDef="actions">
